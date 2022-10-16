@@ -42,3 +42,16 @@ func Unique[T comparable](input []T) []T {
 	}
 	return res
 }
+
+// Clone returns a clone of the input.
+func Clone[T any](input []T) []T { return Filter(input, func(T) bool { return true }) }
+
+// Find returns the first element in the input that satisfies the predicate.
+func Find[T any](input []T, predicate func(T) bool) (T, bool) {
+	res := Filter(input, predicate)
+	if len(res) == 0 {
+		var r T
+		return r, false
+	}
+	return res[0], true
+}
